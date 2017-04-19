@@ -11,13 +11,13 @@ import os
 
 # TODO
 class TaskKill:
-    
+
     def __init__(self):
         pass
-    
+
     def fetch_data(self):
         """
-        Fetches the config data from a json file. 
+        Fetches the config data from a json file.
         """
         with open("config.json", "r+", encoding="utf-8") as config:
             data = json.load(config)
@@ -25,19 +25,20 @@ class TaskKill:
             config.seek(0)
             json.dump(data, config)
             config.truncate(0)
-    
+
     def check_process(self):
         """
         Checks which processes are running and wether to end those processes or not.
         """
-        pass
-    
+        data = [line.split() for line in subprocess.check_output("tasklist").splitlines()][3:]
+        proc = {x[0].decode("utf-8"): x[1].decode("utf-8") for x in data}
+
     def kill_process(self):
         """
         Calls the TASKKILL command to Windows CMD.
         """
         pass
-    
+
     def log_information(self, status):
         """
         Logs information to a log file.
@@ -49,6 +50,3 @@ class TaskKill:
             except Exception as e:
                 print("Unexpected Error Occured: {}".format(e))
                 exit(1)
-                 
-    
-    
