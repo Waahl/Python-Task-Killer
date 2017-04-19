@@ -15,15 +15,27 @@ class TaskKill:
         pass
     
     def fetch_data(self):
+        """
+        Fetches the config data from a json file. 
+        """
         pass
     
     def check_process(self):
+        """
+        Checks which processes are running and wether to end those processes or not.
+        """
         pass
     
     def kill_process(self):
+        """
+        Calls the TASKKILL command to Windows CMD.
+        """
         pass
     
     def log_information(self):
+        """
+        Logs information to a log file.
+        """
         pass
     
     
