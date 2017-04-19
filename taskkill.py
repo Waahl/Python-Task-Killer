@@ -19,7 +19,12 @@ class TaskKill:
         """
         Fetches the config data from a json file. 
         """
-        pass
+        with open("config.json", "r+", encoding="utf-8") as config:
+            data = json.load(config)
+            # Add logic
+            config.seek(0)
+            json.dump(data, config)
+            config.truncate(0)
     
     def check_process(self):
         """
