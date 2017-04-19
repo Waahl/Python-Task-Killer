@@ -42,9 +42,10 @@ class TaskKill:
         """
         Logs information to a log file.
         """
+        separator = "=" * 30
         with open("taskkill_logs.txt", "a", encoding="utf-8") as logs:
             try:
-                logs.write("Kill Status: {}".format(info))
+                logs.write("{} Kill Status: {}\n".format(separator, info))
             except Exception as e:
                 print("Unexpected Error Occured: {}".format(e))
                 exit(1)
