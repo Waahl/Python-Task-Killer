@@ -1,1 +1,8 @@
-
+{    
+    processes: {
+        
+        kill: [],
+        save: []
+        
+    }
+}
