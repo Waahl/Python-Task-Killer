@@ -33,10 +33,16 @@ class TaskKill:
         """
         pass
     
-    def log_information(self):
+    def log_information(self, status):
         """
         Logs information to a log file.
         """
-        pass
+        with open("taskkill_logs.txt", "a", encoding="utf-8") as logs:
+            try:
+                logs.write("Kill Status: {}".format(info))
+            except Exception as e:
+                print("Unexpected Error Occured: {}".format(e))
+                exit(1)
+                 
     
     
