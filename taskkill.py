@@ -42,7 +42,7 @@ class TaskKill:
         """
         Logs information to a log file.
         """
-        separator = "=" * 30
+        separator = "=" * 30 + "\n"
         with open("taskkill_logs.txt", "a", encoding="utf-8") as logs:
             try:
                 logs.write("{} Kill Status: {}\n".format(separator, status))
