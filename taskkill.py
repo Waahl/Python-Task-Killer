@@ -30,7 +30,7 @@ class TaskKill:
         """
         Checks which processes are running and wether to end those processes or not.
         """
-        proc = [line.split() for line in subprocess.check_output("TASKLIST").splitlines()]
+        proc = [line.split() for line in subprocess.check_output("TASKLIST").splitlines()] # Look up /fo parameter for Tasklist
         # Use list comprehension for subprocess.check_output()
         # Clean the list for newlines
         # Add processes and process ids to an dictionary
