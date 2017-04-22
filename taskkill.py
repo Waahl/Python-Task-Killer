@@ -30,9 +30,18 @@ class TaskKill:
         """
         Checks which processes are running and wether to end those processes or not.
         """
+<<<<<<< HEAD
         data = [x.decode("windows-1252").split(",") for x in subprocess.check_output("TASKLIST /FO csv").splitlines()][3:]
         proc = {x[0][1:-1]: int(x[1][1:-1]) for x in data}
 
+=======
+        proc = [line.split() for line in subprocess.check_output("TASKLIST").splitlines()] # Look up /fo parameter for Tasklist
+        # Use list comprehension for subprocess.check_output()
+        # Clean the list for newlines
+        # Add processes and process ids to an dictionary
+        # Return processes and call kill_process with this dictionary
+    
+>>>>>>> 51380a7ae75dde342160a22b70f90aa1a57b6b28
     def kill_process(self):
         """
         Calls the TASKKILL command to Windows CMD.
