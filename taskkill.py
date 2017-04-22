@@ -30,8 +30,8 @@ class TaskKill:
         """
         Checks which processes are running and wether to end those processes or not.
         """
-        data = [line.split() for line in subprocess.check_output("tasklist").splitlines()][3:]
-        proc = {x[0].decode("utf-8"): x[1].decode("utf-8") for x in data}
+        data = [x.decode("windows-1252").split(",") for x in subprocess.check_output("TASKLIST /FO csv").splitlines()][3:]
+        proc = {x[0][1:-1]: int(x[1][1:-1]) for x in data}
 
     def kill_process(self):
         """
