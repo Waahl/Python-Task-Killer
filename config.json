@@ -1,48 +1,5 @@
 {
   "whitelist": [
-<<<<<<< HEAD
-    "chrome.exe",
-    "Steam.exe",
-    "Google Play Music Desktop.exe",
-    "Discord.exe",
-    "atom.exe",
-    "CAM_V3.exe",
-    "MBAMService.exe",
-    "CAMService.exe",
-    "NVDisplay.Container.exe",
-    "smss.exe",
-    "csrss.exe",
-    "wininit.exe",
-    "services.exe",
-    "lsass.exe",
-    "svchost.exe",
-    "WUDFHost.exe",
-    "igfxCUIService.exe",
-    "SecurityHealthService.exe",
-    "MsMpEng.exe",
-    "Memory Compression",
-    "NisSrv.exe",
-    "winlogon.exe",
-    "dwm.exe",
-    "fontdrvhost.exe",
-    "nvxdsync.exe",
-    "sihost.exe",
-    "taskhostw.exe",
-    "ShellExperienceHost.exe",
-    "SearchUI.exe",
-    "MSASCuiL.exe",
-    "dllhost.exe",
-    "ApplicationFrameHost.exe",
-    "SystemSettings.exe",
-    "conhost.exe",
-    "ssh-agent.exe",
-    "audiodg.exe",
-    "SearchProtocolHost.exe",
-    "smartscreen.exe",
-    "WmiPrvSE.exe",
-    "explorer.exe"
-=======
     "PROGRAMS TO NOT KILL"
->>>>>>> ab8bb31b877a521aa967708d42d6e2c24adc4c8c
   ]
 }
