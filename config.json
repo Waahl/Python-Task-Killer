@@ -1,5 +1,6 @@
 {
   "whitelist": [
+<<<<<<< HEAD
     "chrome.exe",
     "Steam.exe",
     "Google Play Music Desktop.exe",
@@ -40,5 +41,8 @@
     "smartscreen.exe",
     "WmiPrvSE.exe",
     "explorer.exe"
+=======
+    "PROGRAMS TO NOT KILL"
+>>>>>>> ab8bb31b877a521aa967708d42d6e2c24adc4c8c
   ]
 }
