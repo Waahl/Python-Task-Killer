@@ -7,8 +7,6 @@
 import subprocess
 import json
 import sys
-import os
-
 
 def fetch_data(process):
     """
@@ -33,9 +31,16 @@ def check_process():
     """
     Checks which processes are running and wether to end those processes or not.
     """
+
+    # Calls the windows command TASKLIST in csv format
+    # Formats it using line splitting and decodes the strings
+    # Splits the commas
+    # Slices it to exclude the first items that define PID, name etc...
     data = [x.decode("windows-1252").split(",") for x in \
     subprocess.check_output("TASKLIST /FO csv").splitlines()][3:]
 
+    # Fetches the name of each process and excludes the single quotations mark
+    # around the string otherwise it would look like '"this.exe"' which is != "this.exe"
     proc = [x[0][1:-1] for x in data]
 
     fetch_data(proc)
@@ -67,6 +72,11 @@ def log_information(status):
         except Exception as e:
             print("Unexpected Error Occured: {}".format(e))
             exit(1)
+    exit(0)
 
 if __name__ == "__main__":
-    check_process()
+    if sys.platform == "win32":
+        check_process()
+    else:
+        print("This os is not based on win32.")
+        exit(1)
