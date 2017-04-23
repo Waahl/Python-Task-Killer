@@ -1,0 +1,45 @@
+ERROR
+==============================
+
+ERROR
+==============================
+
+ERROR
+==============================
+
+ERROR
+==============================
+
+SUCCESS: The process with PID 2884 (child process of PID 4576) has been terminated.
+
+==============================
+
+ERROR
+==============================
+
+ERROR
+==============================
+
+ERROR
+==============================
+
+SUCCESS: The process with PID 4284 (child process of PID 4184) has been terminated.
+
+==============================
+
+ERROR
+==============================
+
+ERROR
+==============================
+
+SUCCESS: The process with PID 5848 (child process of PID 928) has been terminated.
+
+==============================
+
+ERROR
+==============================
+
+ERROR
+==============================
+
