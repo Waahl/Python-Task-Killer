@@ -9,16 +9,25 @@ import json
 import sys
 import os
 
-# TODO
 
 def fetch_data(process):
     """
     Fetches the config data from a json file.
     """
     with open("config.json", "r+", encoding="utf-8") as config:
-        data = json.load(config)
-        if process in data["processes"]:
-            kill_process(process)
+        try:
+            data = json.load(config)
+        except Exception as e:
+            print("Unexpected Error Occured: {}".format(e))
+
+        if len(data["whitelist"]) < 1:
+            print("Warning no processes has been whitelisted in the config.json")
+        else:
+            for proc in process:
+                if proc not in data["whitelist"]:
+                    kill_process(proc)
+                else:
+                    print("Skipping process {}".format(proc))
 
 def check_process():
     """
@@ -29,8 +38,7 @@ def check_process():
 
     proc = [x[0][1:-1] for x in data]
 
-    for process in proc:
-        fetch_data(process)
+    fetch_data(proc)
 
 def kill_process(process):
     """
