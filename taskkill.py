@@ -12,12 +12,14 @@ def fetch_data(process):
     """
     Fetches the config data from a json file.
     """
+
     with open("config.json", "r+", encoding="utf-8") as config:
         try:
             data = json.load(config)
         except Exception as e:
             print("Unexpected Error Occured: {}".format(e))
 
+        # Checks if there are processes in the config.json file
         if len(data["whitelist"]) < 1:
             print("Warning no processes has been whitelisted in the config.json")
         else:
@@ -49,29 +51,40 @@ def kill_process(process):
     """
     Calls the TASKKILL command to Windows CMD.
     """
+    # Stores the output from output of TASKKILL like errors and successes
     status = []
+
     try:
+        # Calls the TASKKILL using the force, terminate all child processes
+        # and the imagename parameter, decodes into utf-8 and appends the output
+        # to the status list.
         proc_status = subprocess.check_output("TASKKILL /F /T /IM {}".format(process)).decode("utf-8")
         status.append(proc_status)
     except subprocess.CalledProcessError:
         print("Failed to find task, skipping.")
         status.append("ERROR")
         pass
+
     log_information(status)
 
 def log_information(status):
     """
     Logs information to a log file.
     """
+
+    # Decorative for the text file storing the logs
     separator = "=" * 30 + "\n"
     with open("taskkill_logs.txt", "a", encoding="utf-8") as logs:
         try:
-            for i in status:
-                logs.write(i)
+            for log in status
+                logs.write(log)
+
+            # Writing the logs with decoration to the log file
             logs.write("\n" + separator + "\n")
         except Exception as e:
             print("Unexpected Error Occured: {}".format(e))
             exit(1)
+
     exit(0)
 
 if __name__ == "__main__":
