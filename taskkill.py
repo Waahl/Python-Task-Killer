@@ -29,6 +29,7 @@ def fetch_data(process):
                     kill_process(proc)
                 else:
                     print("Skipping process {}".format(proc))
+                    continue
 
 def check_process():
     """
@@ -61,8 +62,8 @@ def kill_process(process):
         # to the status list.
         proc_status = subprocess.check_output("TASKKILL /F /T /IM {}".format(process)).decode("utf-8")
         status.append(proc_status)
-    except subprocess.CalledProcessError:
-        print("Failed to find task, skipping.")
+    except subprocess.CalledProcessError as e:
+        print("Error Occured: ", e)
         status.append("ERROR")
         pass
 
