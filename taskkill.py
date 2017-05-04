@@ -76,7 +76,7 @@ def log_information(status):
     separator = "=" * 30 + "\n"
     with open("taskkill_logs.txt", "a", encoding="utf-8") as logs:
         try:
-            for log in status
+            for log in status:
                 logs.write(log)
 
             # Writing the logs with decoration to the log file
