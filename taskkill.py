@@ -20,11 +20,12 @@ def fetch_data(process):
             print("Unexpected Error Occured: {}".format(e))
 
         # Checks if there are processes in the config.json file
-        if len(data["whitelist"]) < 1:
-            print("Warning no processes has been whitelisted in the config.json")
+        if len(data["kill_list"]) < 1:
+            print("Warning no processes has been set to kill in the config.json")
+            exit(1)
         else:
             for proc in process:
-                if proc not in data["whitelist"]:
+                if proc in data["kill_list"]:
                     kill_process(proc)
                 else:
                     print("Skipping process {}".format(proc))
