@@ -8,4 +8,5 @@ Implement the ability to use different profiles.<br>
 
 
 # CURRENT FUNCTIONS
-None<br>
+Task killing from windows cli
+Able to filter which programs to kill
