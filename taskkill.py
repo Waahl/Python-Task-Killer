@@ -90,7 +90,7 @@ def log_information(status):
     exit(0)
 
 if __name__ == "__main__":
-    if sys.platform == "win32":
+    if sys.platform.startswith("win32"):
         check_process()
     else:
         print("This os is not based on win32.")
