@@ -1,0 +1,12 @@
+{
+	"profiles": {
+		"normal": [
+			"example.exe",
+      "hello.exe"
+		],
+    "gaming": [
+      "example.exe",
+      "hello.exe"
+    ]
+	}
+}
