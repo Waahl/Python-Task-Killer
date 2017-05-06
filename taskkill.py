@@ -19,13 +19,18 @@ def fetch_data(process):
         except Exception as e:
             print("Unexpected Error Occured: {}".format(e))
 
+        profiles = {x + 1: i for x, i in enumerate(data["profiles"])}
+        print("PROFILES: {}".format(profiles))
+        profile = input("ENTER ID: ")
+        profile = profiles[int(profile)]
         # Checks if there are processes in the config.json file
-        if len(data["kill_list"]) < 1:
+
+        if len(data["profiles"][profile]) < 1:
             print("Warning no processes has been set to kill in the config.json")
             exit(1)
         else:
             for proc in process:
-                if proc in data["kill_list"]:
+                if proc in data["profiles"][profile]:
                     kill_process(proc)
                 else:
                     print("Skipping process {}".format(proc))
