@@ -7,6 +7,6 @@ Implement cli-GUI.<br>
 
 
 # CURRENT FUNCTIONS
-Task killing from windows cli
-Able to filter which programs to kill
-Ability to add profiles
+Task killing from windows cli<br>
+Able to filter which programs to kill<br>
+Ability to add profiles<br>
