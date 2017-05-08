@@ -18,13 +18,17 @@ def fetch_data(process):
             data = json.load(config)
         except Exception as e:
             print("Unexpected Error Occured: {}".format(e))
-
+        
+        # Dictionary with int as a key for the profile
         profiles = {x + 1: i for x, i in enumerate(data["profiles"])}
+        
         print("PROFILES: {}".format(profiles))
         profile = input("ENTER ID: ")
+        
+        # Sets the current profile to whatever int you chose
         profile = profiles[int(profile)]
+        
         # Checks if there are processes in the config.json file
-
         if len(data["profiles"][profile]) < 1:
             print("Warning no processes has been set to kill in the config.json")
             exit(1)
