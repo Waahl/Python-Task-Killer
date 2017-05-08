@@ -1,15 +1,15 @@
 {
-	"profiles": {
-		"normal": [
-			"example.exe",
+  "profiles": {
+    "normal": [
+      "example.exe",
       "hello.exe"
-			"Add processes like above",
-		],
+      "Add processes like above",
+    ],
     "gaming": [
       "example.exe",
       "hello.exe"
     ],
-		"your profile": [
-		],
-	}
+    "your profile": [
+    ],
+  }
 }
