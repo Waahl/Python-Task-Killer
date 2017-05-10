@@ -29,8 +29,8 @@ def fetch_data(process):
         # Sets the current profile to whatever int you chose
         profile = profiles[int(profile)]
 
-        # List of processes to kill
-        kill_list = []
+        # Set of processes to kill
+        kill_list = set()
 
         # Checks if there are processes in the config.json file
         if len(data["profiles"][profile]) < 1:
@@ -39,14 +39,14 @@ def fetch_data(process):
         else:
             for proc in process:
                 if proc in data["profiles"][profile]:
-                    kill_list.append(proc)
+                    kill_list.add(proc)
                 else:
                     continue
 
         # To avoid duplicates of a process a set is used
         # This will only affect the amount of errors output and reduce the
-        # runtime of the script a bit. 
-        kill_process(set(kill_list))
+        # runtime of the script a bit.
+        kill_process(kill_list)
 
 def check_process():
     """
@@ -95,6 +95,7 @@ def log_information(status):
 
     # Decorative for the text file storing the logs
     separator = "=" * 30 + "\n"
+    
     with open("taskkill_logs.txt", "a", encoding="utf-8") as logs:
         try:
             for log in status:
