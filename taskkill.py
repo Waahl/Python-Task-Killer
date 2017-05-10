@@ -5,6 +5,7 @@
 
 # Imports
 import subprocess
+import datetime
 import json
 import sys
 
@@ -18,16 +19,19 @@ def fetch_data(process):
             data = json.load(config)
         except Exception as e:
             print("Unexpected Error Occured: {}".format(e))
-        
+
         # Dictionary with int as a key for the profile
         profiles = {x + 1: i for x, i in enumerate(data["profiles"])}
-        
+
         print("PROFILES: {}".format(profiles))
         profile = input("ENTER ID: ")
-        
+
         # Sets the current profile to whatever int you chose
         profile = profiles[int(profile)]
-        
+
+        # List of processes to kill
+        kill_list = []
+
         # Checks if there are processes in the config.json file
         if len(data["profiles"][profile]) < 1:
             print("Warning no processes has been set to kill in the config.json")
@@ -35,10 +39,14 @@ def fetch_data(process):
         else:
             for proc in process:
                 if proc in data["profiles"][profile]:
-                    kill_process(proc)
+                    kill_list.append(proc)
                 else:
-                    print("Skipping process {}".format(proc))
                     continue
+
+        # To avoid duplicates of a process a set is used
+        # This will only affect the amount of errors output and reduce the
+        # runtime of the script a bit. 
+        kill_process(set(kill_list))
 
 def check_process():
     """
@@ -65,16 +73,18 @@ def kill_process(process):
     # Stores the output from output of TASKKILL like errors and successes
     status = []
 
-    try:
-        # Calls the TASKKILL using the force, terminate all child processes
-        # and the imagename parameter, decodes into utf-8 and appends the output
-        # to the status list.
-        proc_status = subprocess.check_output("TASKKILL /F /T /IM {}".format(process)).decode("utf-8")
-        status.append(proc_status)
-    except subprocess.CalledProcessError as e:
-        print("Error Occured: ", e)
-        status.append("ERROR")
-        pass
+    for proc in process:
+        try:
+            # Calls the TASKKILL using the force, terminate all child processes
+            # and the imagename parameter, decodes into utf-8 and appends the output
+            # to the status list.
+            proc_status = subprocess.check_output("TASKKILL /F /T /IM {}".format(proc)).decode("utf-8")
+            status.append(proc_status)
+
+        except subprocess.CalledProcessError as e:
+            print("Error Occured: ", e)
+            status.append("ERROR")
+            pass
 
     log_information(status)
 
@@ -88,7 +98,7 @@ def log_information(status):
     with open("taskkill_logs.txt", "a", encoding="utf-8") as logs:
         try:
             for log in status:
-                logs.write(log)
+                logs.write(log + " : " + str(datetime.datetime.now()))
 
             # Writing the logs with decoration to the log file
             logs.write("\n" + separator + "\n")
