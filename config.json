@@ -1,0 +1,16 @@
+{
+	"profiles": {
+		"normal": [
+      "chrome.exe",
+			"Discord.exe",
+			"Steam.exe",
+			"Google Play Music Desktop Player.exe",
+			"CyberGhost.exe"
+		],
+    "gaming": [
+      "chrome.exe",
+      "atom.exe",
+      "CyberGhost.exe"
+    ]
+	}
+}
