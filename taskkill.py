@@ -4,7 +4,7 @@
 # Task Killer For Windows
 
 # Imports
-import subprocess
+from subprocess import check_output, CalledProcessError
 import datetime
 import json
 import sys
@@ -23,18 +23,26 @@ def fetch_data(process):
         # Dictionary with int as a key for the profile
         profiles = {x + 1: i for x, i in enumerate(data["profiles"])}
 
-        print("PROFILES: {}".format(profiles))
+        print("PLEASE CHOOSE A PROFILE.\n")
+        for k, v in profiles.items():
+            print("{}: {}".format(k, v.upper()))
+
         profile = input("ENTER ID: ")
 
         # Sets the current profile to whatever int you chose
-        profile = profiles[int(profile)]
+        try:
+            profile = profiles[int(profile)]
+
+        except Exception as e:
+            print("PLEASE USE THE ID OF THE PROFILE YOU CHOSE.")
+            check_process()
 
         # Set of processes to kill
         kill_list = set()
 
         # Checks if there are processes in the config.json file
         if len(data["profiles"][profile]) < 1:
-            print("Warning no processes has been set to kill in the config.json")
+            print("WARNING NO PROCESS HAS BEEN SET TO KILL IN THE config.json")
             exit(1)
         else:
             for proc in process:
@@ -58,7 +66,7 @@ def check_process():
     # Splits the commas
     # Slices it to exclude the first items that define PID, name etc...
     data = [x.decode("windows-1252").split(",") for x in \
-    subprocess.check_output("TASKLIST /FO csv").splitlines()][3:]
+    check_output("TASKLIST /FO csv").splitlines()][3:]
 
     # Fetches the name of each process and excludes the single quotations mark
     # around the string otherwise it would look like '"this.exe"' which is != "this.exe"
@@ -78,13 +86,12 @@ def kill_process(process):
             # Calls the TASKKILL using the force, terminate all child processes
             # and the imagename parameter, decodes into utf-8 and appends the output
             # to the status list.
-            proc_status = subprocess.check_output("TASKKILL /F /T /IM {}".format(proc)).decode("utf-8")
+            proc_status = check_output("TASKKILL /F /T /IM {}".format(proc)).decode("utf-8")
             status.append(proc_status)
 
-        except subprocess.CalledProcessError as e:
-            print("Error Occured: ", e)
+        except CalledProcessError as e:
+            print("Unexpected Error Occured: ", e)
             status.append("ERROR")
-            pass
 
     log_information(status)
 
@@ -94,8 +101,7 @@ def log_information(status):
     """
 
     # Decorative for the text file storing the logs
-    separator = "=" * 30 + "\n"
-    
+    separator = "{}\n".format("="*30)
     with open("taskkill_logs.txt", "a", encoding="utf-8") as logs:
         try:
             for log in status:
