@@ -23,11 +23,16 @@ def fetch_data(process):
         # Dictionary with int as a key for the profile
         profiles = {x + 1: i for x, i in enumerate(data["profiles"])}
 
-        print("PLEASE CHOOSE A PROFILE.\n")
-        for k, v in profiles.items():
-            print("{}: {}".format(k, v.upper()))
+        try:
+            if sys.argv[1]:
+                profile = sys.argv[1]
 
-        profile = input("ENTER ID: ")
+        except IndexError:
+            print("PLEASE CHOOSE A PROFILE.\n")
+            for k, v in profiles.items():
+                print("{}: {}".format(k, v.upper()))
+
+            profile = input("ENTER ID: ")
 
         # Sets the current profile to whatever int you chose
         try:
