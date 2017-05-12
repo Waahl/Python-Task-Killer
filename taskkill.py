@@ -9,6 +9,13 @@ import datetime
 import json
 import sys
 
+CLI_HEADER = """
+  /\_/\\
+=( °w° )=       TASKKILLER
+  )   (  //
+ (__ __)//
+"""
+
 def fetch_data(process):
     """
     Fetches the config data from a json file.
@@ -122,6 +129,7 @@ def log_information(status):
 
 if __name__ == "__main__":
     if sys.platform.startswith("win32"):
+        print("{}\n".format(CLI_HEADER))
         check_process()
     else:
         print("This os is not based on win32.")
